@@ -30,4 +30,19 @@ app.post("/api/registration", (req, res) => {
   return res.json({ data: "registered successfully" });
 });
 
+app.put("/api/update/:uname", async (req, res) => {
+  const uname = req.params.uname;
+  const pass = req.body.password;
+  const name = req.body.name;
+  const age = req.body.age;
+
+  const updateUser = await userModel.updateOne(
+      {password: pass},
+      {name: name},
+      {age: age}
+  );
+
+  return res.json({ data: "Updated successfully" });
+});
+
 app.listen(port, () => console.log(`server running on port 4000`));
